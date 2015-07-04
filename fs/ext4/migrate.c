@@ -659,12 +659,8 @@ int ext4_ind_migrate(struct inode *inode)
 	else {
 		len = le16_to_cpu(ex->ee_len);
 		blk = ext4_ext_pblock(ex);
-<<<<<<< HEAD
 		start = le32_to_cpu(ex->ee_block);
 		end = start + len - 1;
-=======
-		end = le32_to_cpu(ex->ee_block) + len - 1;
->>>>>>> fffd87cf21a... ext4: be more strict when migrating to non-extent based file
 		if (end >= EXT4_NDIR_BLOCKS) {
 			ret = -EOPNOTSUPP;
 			goto errout;
