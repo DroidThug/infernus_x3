@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 3.10.105 Kernel Configuration
+# Linux/arm64 3.10.105Infernus-alpha-v0.1 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -2031,6 +2031,7 @@ CONFIG_OF_GPIO=y
 #
 # CONFIG_W1 is not set
 CONFIG_POWER_SUPPLY=y
+CONFIG_FORCE_FAST_CHARGE=y
 # CONFIG_POWER_SUPPLY_DEBUG is not set
 # CONFIG_PDA_POWER is not set
 # CONFIG_TEST_POWER is not set
