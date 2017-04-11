@@ -30,7 +30,6 @@
 
 #include <cust_vibrator.h>
 #include <vibrator_hal.h>
-#include <mt-plat/upmu_common.h>
 
 
 #define VERSION					        "v 0.1"
@@ -233,31 +232,6 @@ static ssize_t store_vibr_on(struct device *dev, struct device_attribute *attr, 
 
 static DEVICE_ATTR(vibr_on, 0220, NULL, store_vibr_on);
 
-//default is 6 in device tree
-static int vib_vol = 6;
-static ssize_t show_vibr_vol(struct device *dev, struct device_attribute *attr,
-								char *buf)
-{
-	return scnprintf(buf, PAGE_SIZE, "%d\n", vib_vol);
-}
-
-static ssize_t store_vibr_vol(struct device *dev, struct device_attribute *attr,
-			     const char *buf, size_t size)
-{
-	int val;
-	sscanf(buf, "%d ", &val);
-	if (val >= 0 && val < 8) {
-		vib_vol = val;
-		pmic_set_register_value(PMIC_RG_VIBR_VOSEL, vib_vol);
-	}
-
-	return size;
-}
-
-static DEVICE_ATTR(vibr_vol, 0644, show_vibr_vol, store_vibr_vol);
-
-
-
 /******************************************************************************
  * vib_mod_init
  *
@@ -312,9 +286,6 @@ static int vib_mod_init(void)
 	ret = device_create_file(mtk_vibrator.dev, &dev_attr_vibr_on);
 	if (ret) {
 		printk("[vibrator]device_create_file vibr_on fail!\n");
-	ret = device_create_file(mtk_vibrator.dev, &dev_attr_vibr_vol);
-	if (ret)
-		printk("device_create_file vibr_on fail!\n");
 	}
 
 	printk("[vibrator]vib_mod_init Done\n");
