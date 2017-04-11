@@ -282,6 +282,9 @@ static unsigned int read_efuse_speed(void) // TODO: remove it latter
 	unsigned int efuse = _GET_BITS_VAL_(27 : 24, get_devinfo_with_index(CPUFREQ_EFUSE_INDEX));
 
 #ifdef CONFIG_OF
+#ifdef CONFIG_MTK_CPU_OC
+    return CPU_LEVEL_1;	// force LEVEL_1
+#else
 {
 	struct device_node *node = NULL;
 	unsigned int cpu_speed = 0;
@@ -306,6 +309,7 @@ static unsigned int read_efuse_speed(void) // TODO: remove it latter
 			break;
 	}
 }
+#endif
 #endif
 	return lv;
 }
@@ -1025,6 +1029,19 @@ static struct mt_cpu_freq_info opp_tbl_big_e2_0[] = {
 	OP(DVFS_BIG_F7, 806),
 };
 
+#ifdef CONFIG_MTK_CPU_OC
+/* big CPU LEVEL 1 (E2) */
+static struct mt_cpu_freq_info opp_tbl_big_e2_1[] = {
+	OP(2002000, 1100),
+	OP(1681000, 1060),
+	OP(1420000, 1019),
+	OP(1352000, 981),
+	OP(DVFS_BIG_F4, 943),
+	OP(DVFS_BIG_F5, 916),
+	OP(DVFS_BIG_F6, 880),
+	OP(DVFS_BIG_F7, 806),
+};
+#else
 /* big CPU LEVEL 1 (E2) */
 static struct mt_cpu_freq_info opp_tbl_big_e2_1[] = {
 	OP(2002000, 1100),
