@@ -1,0 +1,3 @@
+[submodule "infernus/release/AnyKernel2"]
+	path = infernus/release/AnyKernel2
+	url = https://github.com/DroidThug/AnyKernel2
